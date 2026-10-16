@@ -135,3 +135,31 @@ export function formatReport(text, analysis, lang = 'en', ai = '') {
   lines.push('---', ko ? '고객과 합의하기 전에 사람이 직접 사실관계를 확인하세요.' : 'Review factual accuracy with the actual client before agreeing to work.', '');
   return lines.join('\n');
 }
+
+
+/**
+ * Rejects low-quality local-model responses before displaying them.
+ * This is a presentation guard, not a factual correctness verifier.
+ */
+export function validateGeneratedQuestions(text) {
+  const candidate=String(text??'').trim();
+  if(candidate.length<45 || candidate.length>1700 || /<brief\b|<\/?(system|user|assistant)>/i.test(candidate))return false;
+  const lines=candidate.split(/\n+/).map(s=>s.trim()).filter(Boolean);
+  const questions=lines.filter(s=>s.includes('?')||/^\d+[.)]\s+/.test(s)).slice(0,6);
+  if(questions.length<2)return false;
+  const normalized=questions.map(s=>s.replace(/^\d+[.)]\s+/,'').toLowerCase().replace(/[^\p{L}\p{N}\s]/gu,' ').replace(/\s+/g,' ').trim());
+  if(new Set(normalized).size!==normalized.length)return false;
+  for(let i=0;i<normalized.length;i++){
+    for(let j=i+1;j<normalized.length;j++){
+      const a=normalized[i],b=normalized[j];
+      let prefix=0;while(prefix<a.length&&prefix<b.length&&a[prefix]===b[prefix])prefix++;
+      if(prefix>32)return false;
+      const ta=new Set(a.split(' ').filter(w=>w.length>3));
+      const tb=new Set(b.split(' ').filter(w=>w.length>3));
+      const intersection=[...ta].filter(w=>tb.has(w)).length;
+      const union=new Set([...ta,...tb]).size||1;
+      if(intersection/union>.70)return false;
+    }
+  }
+  return true;
+}

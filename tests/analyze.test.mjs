@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { RULES, analyzeBrief, SAMPLE_BRIEF_EN, SAMPLE_BRIEF_KO, createModelPrompt, formatReport } from '../src/analyze.mjs';
+import { RULES, analyzeBrief, SAMPLE_BRIEF_EN, SAMPLE_BRIEF_KO, createModelPrompt, formatReport, validateGeneratedQuestions } from '../src/analyze.mjs';
 
 test('all rule ids are distinct and weights sum to 100', () => {
   assert.equal(new Set(RULES.map(r=>r.id)).size, RULES.length);
@@ -59,4 +59,14 @@ test('reject unrealistic very large brief and incorrect prompt call',()=>{
  assert.throws(()=>analyzeBrief('x'.repeat(8001)), RangeError);
  assert.throws(()=>analyzeBrief({x:1}),TypeError);
  assert.throws(()=>createModelPrompt('hi',{}),TypeError);
+});
+
+test('AI draft quality guard rejects repeated paraphrases and model tags',()=>{
+ const repetitive='1. What is the minimum number of pages for a signup form?\n2. What is the minimum number of pages for a mobile layout?\n3. What is the minimum number of pages for a logo?';
+ assert.equal(validateGeneratedQuestions(repetitive),false);
+ assert.equal(validateGeneratedQuestions('<brief><brief><brief>'),false);
+});
+test('AI draft quality guard accepts distinct relevant questions',()=>{
+ const good='1. How many revision rounds are included in the fixed price?\n2. When is the initial deposit payable?\n3. Who has final authority to approve the design?';
+ assert.equal(validateGeneratedQuestions(good),true);
 });

@@ -1,5 +1,5 @@
 import './styles.css';
-import {analyzeBrief,formatReport,createModelPrompt,SAMPLE_BRIEF_EN,SAMPLE_BRIEF_KO,RULES} from './analyze.mjs';
+import {analyzeBrief,formatReport,createModelPrompt,validateGeneratedQuestions,SAMPLE_BRIEF_EN,SAMPLE_BRIEF_KO,RULES} from './analyze.mjs';
 
 const $ = id => document.getElementById(id);
 const ui = {
@@ -254,10 +254,7 @@ async function runLocalAI(){
     let reply=typeof generated==='string'?generated
       :Array.isArray(generated)?(generated.filter(m=>m.role==='assistant').at(-1)?.content??''):'';
     reply=String(reply||'').trim().slice(0,1700);
-    const countQuestionMarks=(reply.match(/\?/g)||[]).length;
-    const numbered=(reply.match(/(?:^|\n)\s*\d+[.)]\s+/g)||[]).length;
-    const repeatedTags=(reply.match(/<brief>/g)||[]).length;
-    if(reply.length<34||repeatedTags>0||(countQuestionMarks<2&&numbered<2))throw Error('Local model generated unusable questions');
+    if(!validateGeneratedQuestions(reply))throw Error('Local model generated repetitive or unusable questions');
     if(pinned!==$('brief-text').value)throw Error('Brief changed after AI generation');
     aiGenerated=reply;
     output.textContent=reply;
