@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1b29">
+  <meta name="description" content="ScopeLens checks freelancer briefs for missing budget, deliverables and acceptance details, then drafts follow-up questions with a local open-weight AI model.">
+  <title>ScopeLens — Know what to ask before you quote.</title>
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <script type="module" crossorigin src="/scope-lens/assets/index-DsMA7LTN.js"></script>
+  <link rel="stylesheet" crossorigin href="/scope-lens/assets/index-DVz-HuCB.css">
+</head>
+<body>
+  <a class="skip" href="#app">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="ScopeLens home"><span class="brand-symbol">S<span>↗</span></span><span>scope<span class="brand-italics">lens</span><small>CLARITY BEFORE COMMITMENT</small></span></a>
+    <div class="nav-actions"><span class="offline"><i></i><span id="network-note">Private by design</span></span><button id="lang" class="language" type="button" aria-label="Switch to Korean">KR <span>↗</span></button><a class="nav-link" href="https://github.com/livastic-vm1-primary/scope-lens" target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <main id="app">
+    <section class="hero" id="top">
+      <div class="container hero-layout">
+        <div class="hero-copy"><div class="eyebrow"><span class="eyebrow-dash"></span><span data-k="eyebrow">FOR FREELANCERS, MAKERS & SMALL TEAMS</span></div><h1 data-k="heroTitle">Get clear.<br><em>Then get paid.</em></h1><p data-k="heroDesc">A rushed client brief hides expensive unknowns. Check what's missing in seconds, then ask smarter questions with a tiny open-weight model running on your device.</p><div class="hero-details"><span><b>01</b> <span data-k="benefit1">Catch hidden scope</span></span><span><b>02</b> <span data-k="benefit2">Ask better questions</span></span><span><b>03</b> <span data-k="benefit3">Keep briefs private</span></span></div></div>
+        <div class="hero-art" aria-hidden="true"><div class="art-back"></div><div class="art-sheet"><div class="art-line line-short"></div><div class="art-line"></div><div class="art-line line-mid"></div><div class="art-divider"></div><div class="art-row"><span class="art-ok">✓</span><span>Deliverables</span><span class="art-tag green">FOUND</span></div><div class="art-row"><span class="art-alert">!</span><span>Revision policy</span><span class="art-tag pink">ASK</span></div><div class="art-row"><span class="art-ok">✓</span><span>Deadline</span><span class="art-tag green">FOUND</span></div><div class="art-row"><span class="art-alert">!</span><span>Payment terms</span><span class="art-tag pink">ASK</span></div><div class="art-signature"></div></div><div class="art-float float-a">Scope gaps identified <b>↗</b></div><div class="art-float float-b"><b>100%</b> in your browser</div></div>
+      </div>
+    </section>
+    <section class="work" id="analyzer"><div class="container">
+      <div class="section-head"><div><div class="tiny-label">01 / <span data-k="sectionLabel">THE WORKBENCH</span></div><h2 data-k="workTitle">Paste a brief. See the gaps.</h2><p data-k="workDesc">Sample details are fictional. Enter a real brief only if you're comfortable processing it in your own browser.</p></div><div class="chip" id="status-pill"><span class="chip-dot"></span><span data-k="chip">NO API KEYS REQUIRED</span></div></div>
+      <div class="workspace">
+        <div class="input-card"><div class="card-heading"><span data-k="brief">CLIENT BRIEF</span><span id="count">0 / 8,000</span></div>
+          <label class="sr-only" for="brief-text">Client project brief</label><textarea id="brief-text" maxlength="8000" spellcheck="true" placeholder="Paste a project request here..." aria-describedby="privacy-note"></textarea>
+          <div class="input-bottom"><p id="privacy-note" data-k="privacy"><span class="lock">⌁</span> Heuristic checks run offline. AI weights download once only when you request it; your brief is not sent to a hosted AI API.</p><div class="sample-row"><button type="button" id="sample-en" class="text-btn">Load EN sample</button><button type="button" id="sample-ko" class="text-btn">한국어 예시</button><button type="button" id="clear" class="text-btn subtle" data-k="clear">Clear</button></div></div>
+          <div class="actions"><button type="button" id="analyze" class="btn btn-dark"><span data-k="scan">Scan for scope gaps</span> <span aria-hidden="true">↗</span></button><button type="button" id="ai" class="btn btn-ai"><span class="ai-symbol">✳</span><span data-k="ai">Draft with local AI</span></button></div>
+          <p class="hint" id="model-status" aria-live="polite"></p>
+        </div>
+        <div class="results-card" id="results" aria-live="polite">
+          <div class="empty" id="empty"><div class="empty-circle">◎</div><p class="tiny-label">READY FOR INSPECTION</p><h3 data-k="emptyTitle">Answers before assumptions.</h3><p data-k="emptyDesc">Your scope report will appear here after you run a check.</p></div>
+          <div class="report hidden" id="report"><div class="report-header"><div><span class="tiny-label">SCOPE REPORT / LOCAL CHECK</span><h3 id="report-title">6 questions to confirm</h3></div><span id="risk-badge" class="risk-badge">CHECK</span></div>
+            <div class="score-line"><div><span id="score" class="score">0</span><span class="score-out">/100</span></div><div><strong data-k="signal">Ambiguity signal</strong><p data-k="scoreDisclaimer">Not a contract risk rating. Keyword matches can miss nuance.</p></div></div>
+            <div class="bar-track"><span id="bar" style="width:0%"></span></div>
+            <div class="report-stats"><div><strong id="found">0</strong><span data-k="found">Topics found</span></div><div><strong id="missing">0</strong><span data-k="missing">To clarify</span></div><div><strong id="word-count">0</strong><span data-k="words">Words scanned</span></div></div>
+            <div class="list-section"><div class="list-head"><h4 data-k="gaps">MISSING TOPICS</h4></div><div id="gaps-list" class="gaps-list"></div></div>
+            <div class="list-section"><div class="list-head"><h4 data-k="questions">SUGGESTED QUESTIONS</h4></div><ol id="questions-list" class="questions-list"></ol></div>
+            <div class="list-section ai-section"><div class="list-head"><h4 data-k="aiTitle">OPEN-WEIGHT AI SUGGESTIONS</h4><span>SmolLM2 · 360M</span></div><div id="ai-output" class="ai-output">Optional: tap “Draft with local AI” to download a small model and generate an editable draft. The model may make mistakes; verify before sending.</div></div>
+            <div class="report-actions"><button type="button" id="download" class="btn btn-outline" data-k="download">Export notes (.md) ↓</button><button type="button" id="copy" class="btn btn-outline" data-k="copy">Copy questions ↗</button></div>
+          </div>
+        </div>
+      </div>
+      <p class="footnotice" data-k="footnote">Method note: the first scan checks for keyword signals, not actual contractual sufficiency. The AI model generates text and may be inaccurate. Always verify scope and commercial terms with the client.</p>
+    </div></section>
+    <section class="features" id="how"><div class="container feature-layout"><div><span class="tiny-label">02 / HOW IT WORKS</span><h2 data-k="howTitle">No cloud.<br>No guessing.</h2><p data-k="howDesc">The boring but costly questions often fall through the cracks. ScopeLens combines transparent checks with optional private model inference.</p></div><div class="feature-stack"><div class="feature"><span class="feature-icon">01</span><div><h3 data-k="f1">Transparent first pass</h3><p data-k="f1d">Eight visible topics. Each gap has a fixed, editable client question. The heuristic scan requires no downloads or API keys.</p></div></div><div class="feature"><span class="feature-icon">02</span><div><h3 data-k="f2">Open-weight second opinion</h3><p data-k="f2d">SmolLM2-135M-Instruct runs with Transformers.js on your device after the model is downloaded. The generated questions are suggestions, not fact checks.</p></div></div><div class="feature"><span class="feature-icon">03</span><div><h3 data-k="f3">Take it to your workflow</h3><p data-k="f3d">Export Markdown notes, revise the scope with your customer, then use your own quoting or invoicing process. We store no brief on our servers.</p></div></div></div></div></section>
+    <section class="cta"><div class="container cta-inner"><div><p class="tiny-label">INDEPENDENT. OPEN-SOURCE. ADAPTABLE.</p><h2 data-k="ctaTitle">The most expensive word<br>in a brief is “assume.”</h2><p data-k="ctaBody">This prototype is free and open source. If you want a tailored checklist for your agency's workflow, get in touch for a scoped discussion—no payment flow here.</p></div><a class="btn btn-lime" href="mailto:onecursor1@gmail.com?subject=ScopeLens%20custom%20workflow%20inquiry" data-k="contact">Discuss custom workflows ↗</a></div></section>
+  </main>
+  <footer><div class="container footer-inner"><a class="brand" href="#top"><span class="brand-symbol">S<span>↗</span></span><span>scope<span class="brand-italics">lens</span></span></a><p data-k="footer">Original prototype · Client text remains on your device · Local model download from Hugging Face on demand.</p><div class="footer-links"><a href="https://huggingface.co/onnx-community/SmolLM2-360M-Instruct-ONNX" target="_blank" rel="noopener noreferrer">Model ↗</a><a href="https://github.com/livastic-vm1-primary/scope-lens" target="_blank" rel="noopener noreferrer">Code ↗</a><a href="https://livastic-vm1-primary.github.io/paperpilot-tools/" target="_blank" rel="noopener noreferrer">PaperPilot ↗</a></div></div></footer>
+</body></html>
