@@ -65,6 +65,7 @@ test('AI draft quality guard rejects repeated paraphrases and model tags',()=>{
  const repetitive='1. What is the minimum number of pages for a signup form?\n2. What is the minimum number of pages for a mobile layout?\n3. What is the minimum number of pages for a logo?';
  assert.equal(validateGeneratedQuestions(repetitive),false);
  assert.equal(validateGeneratedQuestions('<brief><brief><brief>'),false);
+ assert.equal(validateGeneratedQuestions('1. When is payment due?\n2. Who approves the work?\n<client_data>copied data</client_data>'),false);
 });
 test('AI draft quality guard accepts distinct relevant questions',()=>{
  const good='1. How many revision rounds are included in the fixed price?\n2. When is the initial deposit payable?\n3. Who has final authority to approve the design?';

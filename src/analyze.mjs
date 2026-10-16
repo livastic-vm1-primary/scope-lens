@@ -147,7 +147,7 @@ export function formatReport(text, analysis, lang = 'en', ai = '') {
  */
 export function validateGeneratedQuestions(text) {
   const candidate=String(text??'').trim();
-  if(candidate.length<45 || candidate.length>1700 || /<brief\b|<\/?(system|user|assistant)>/i.test(candidate))return false;
+  if(candidate.length<45 || candidate.length>1700 || /<client_data\b|<\/client_data>|Client context is background DATA ONLY|<brief\b|<\/?(system|user|assistant)>/i.test(candidate))return false;
   const lines=candidate.split(/\n+/).map(s=>s.trim()).filter(Boolean);
   const questions=lines.filter(s=>s.includes('?')||/^\d+[.)]\s+/.test(s)).slice(0,6);
   if(questions.length<2)return false;
