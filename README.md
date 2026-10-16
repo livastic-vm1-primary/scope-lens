@@ -79,3 +79,8 @@ The initial 135M parameter model generated repetitive nonsense on the actual VM 
 **No verified earnings, competition prize or customers are claimed by this repository.** This is a free prototype and opt-in potential consulting lead source.
 
 To run headless browser QA, install a compatible Google Chrome binary and optionally set PLAYWRIGHT_CHROME_PATH. Screenshots are kept in git-ignored test-artifacts/. On low-resource devices you may skip optional AI inference.
+
+
+### Optional custom-scope contact
+
+A distinct, owner-activated [login-free inquiry form](https://livastic-vm1-primary.github.io/paperpilot-tools/contact.html) is linked from this prototype. Unlike ScopeLens's on-device brief scan, this contact form sends consented contact and general project details through **third-party FormSubmit**, and the form clearly discloses this. Visitors may instead use the original direct email link or public GitHub issue. It is not a payment checkout or an accepted paid order.
